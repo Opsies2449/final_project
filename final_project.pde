@@ -2,57 +2,41 @@
  Adam
  Final processing project
  TODO: add brief description of final project here
+ TODO: restart since its not too late -DONE
+ TODO: make it two player racing game
  TODO: add FPS feature -DONE
- TODO: add a main menu of my aim trainer game -DONE
+ TODO: add the background and the images for the game
+ TODO: make it so when you select a mode, you can choose a map that then changes the background
  */
 
 int lastMillis = 0;
 double fps= 0;
 
 void setup() {
-  size(700, 700);
+  size(1200, 700);
 }
 
 void draw() {
   background(0, 0, 0);
   trackFrames();
 
+  textSize(40);
   fill(255, 255, 255);
-  textAlign(CENTER);
-  textSize(50);
-  text("Adam's Aim Trainer", 350, 100);
+  text("Adam's Grand Prix game", 140, 220);
 
   textSize(30);
-  text("SELECT A MODE", 350, 170);
-
-  textSize(20);
+  text("Select a gamemode", 205, 270);
 
   fill(50, 180, 80);
-  rect(200, 220, 300, 50);
+  rect(200, 310, 300, 60);
   fill(255, 255, 255);
-  text("Noob", 350, 252);
+  textSize(20);
+  text("Grand Prix", 300, 347);
 
   fill(220, 160, 40);
-  rect(200, 290, 300, 50);
+  rect(200, 390, 300, 60);
   fill(255, 255, 255);
-  text("Normal", 350, 322);
-
-  fill(50, 150, 220);
-  rect(200, 360, 300, 50);
-  fill(255, 255, 255);
-  text("Above Average", 350, 392);
-
-  fill(160, 80, 220);
-  rect(200, 430, 300, 50);
-  fill(255, 255, 255);
-  text("Pro", 350, 462);
-
-  fill(220, 60, 60);
-  rect(200, 500, 300, 50);
-  fill(255, 255, 255);
-  text("HACKER", 350, 532);
-
-  textAlign(LEFT);
+  text("Endless", 310, 427);
 }
 
 void trackFrames() {
