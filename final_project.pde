@@ -1,4 +1,4 @@
-/* //<>//
+/*
  Adam
  Final processing project
  TODO: add brief description of final project here
@@ -14,13 +14,18 @@ double fps = 0;
 int screen = 0;
 int gamemode = 0;
 
+int car1X = 50;
+int car2X = 50;
+
+boolean dReleased = true;
+boolean lReleased = true;
+
 void setup() {
   size(1200, 700);
 }
 
 void draw() {
   background(0, 0, 0);
-  trackFrames();
 
   if (screen == 0) {
     textSize(40);
@@ -63,7 +68,7 @@ void draw() {
     fill(30, 150, 150);
     rect(700, 310, 300, 60);
     fill(255, 255, 255);
-    text("Pluto's orbit", 800, 347);
+    text("Pluto", 800, 347);
 
     fill(200, 100, 100);
     rect(700, 400, 300, 60);
@@ -76,29 +81,19 @@ void draw() {
     text("Back", 575, 557);
   }
 
-  if (screen == 2) {
-    background(0, 0, 0);
+  if (screen == 2 || screen == 3 || screen == 4 ||
+    screen == 5 || screen == 6 || screen == 7) {
+
+    noStroke();
+
+    fill(255, 0, 0);
+    rect(car1X, 250, 80, 40);
+
+    fill(255, 0, 0);
+    rect(car2X, 420, 80, 40);
   }
 
-  if (screen == 3) {
-    background(0, 0, 0);
-  }
-
-  if (screen == 4) {
-    background(0, 0, 0);
-  }
-
-  if (screen == 5) {
-    background(0, 0, 0);
-  }
-
-  if (screen == 6) {
-    background(0, 0, 0);
-  }
-
-  if (screen == 7) {
-    background(0, 0, 0);
-  }
+  trackFrames();
 }
 
 void mousePressed() {
@@ -135,6 +130,32 @@ void mousePressed() {
     if (mouseX > 450 && mouseX < 750 && mouseY > 520 && mouseY < 580) {
       screen = 0;
     }
+  }
+}
+
+void keyPressed() {
+  if ((key == 'd' || key == 'D') && dReleased) {
+    if (car1X < 1070) {
+      car1X = car1X + 10;
+    }
+    dReleased = false;
+  }
+
+  if ((key == 'l' || key == 'L') && lReleased) {
+    if (car2X < 1070) {
+      car2X = car2X + 10;
+    }
+    lReleased = false;
+  }
+}
+
+void keyReleased() {
+  if (key == 'd' || key == 'D') {
+    dReleased = true;
+  }
+
+  if (key == 'l' || key == 'L') {
+    lReleased = true;
   }
 }
 
