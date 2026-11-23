@@ -9,6 +9,9 @@
  TODO: add backgrounds and decoration
  */
 
+PImage player_1_car;
+PImage player_2_car;
+
 int screen = 0;
 int gamemode = 0;
 
