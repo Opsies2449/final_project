@@ -9,8 +9,6 @@
  TODO: add backgrounds and decoration
  */
 
-int raceTime = 0;
-
 int screen = 0;
 int gamemode = 0;
 
@@ -18,11 +16,13 @@ int car1X = 50;
 int car2X = 50;
 
 int winner = 0;
+boolean tie = false;
 
 boolean dReleased = true;
 boolean lReleased = true;
 
 boolean raceStarted = false;
+int raceTime = 0;
 
 int countdownStart = 0;
 boolean countdownActive = true;
@@ -58,35 +58,25 @@ void draw() {
     textSize(20);
     text("Adam's neighborhood", 265, 257);
 
-    fill(220, 160, 40);
-    rect(200, 310, 300, 60);
-    fill(255, 255, 255);
-    text("Utah salt flats", 290, 347);
-
     fill(50, 100, 220);
-    rect(200, 400, 300, 60);
-    fill(255, 255, 255);
-    text("Garbage disposal", 275, 437);
-
-    fill(150, 50, 200);
     rect(700, 220, 300, 60);
     fill(255, 255, 255);
-    text("Sushi resturant", 790, 257);
+    text("Garbage disposal", 775, 257);
 
-    fill(30, 150, 150);
-    rect(700, 310, 300, 60);
+    fill(150, 50, 200);
+    rect(200, 310, 300, 60);
     fill(255, 255, 255);
-    text("Pluto", 827, 347);
+    text("Sushi resturant", 285, 347);
 
     fill(200, 100, 100);
-    rect(700, 400, 300, 60);
+    rect(700, 310, 300, 60);
     fill(255, 255, 255);
-    text("Super steep ski hill", 765, 437);
+    text("Super steep ski hill", 765, 347);
 
     fill(220, 3, 2);
-    rect(450, 520, 300, 60);
+    rect(450, 450, 300, 60);
     fill(255, 255, 255);
-    text("Back", 575, 557);
+    text("Back", 575, 487);
   }
 
   if (screen == 2 || screen == 3 || screen == 4 ||
@@ -121,18 +111,18 @@ void draw() {
       }
     }
 
-    if (winner == 0 && raceStarted) {
+    if (winner == 0 && tie == false && raceStarted) {
       raceTime = (millis() - raceTimer) / 1000;
 
       textSize(25);
       fill(255);
       text("Time: " + raceTime + " seconds", 50, 50);
 
-      if (car1X + 80 >= 1100) {
+      if (car1X + 80 >= 1100 && car2X + 80 >= 1100) {
+        tie = true;
+      } else if (car1X + 80 >= 1100) {
         winner = 1;
-      }
-
-      if (car2X + 80 >= 1100) {
+      } else if (car2X + 80 >= 1100) {
         winner = 2;
       }
     }
@@ -154,6 +144,15 @@ void draw() {
       text("Time: " + raceTime + " seconds", 460, 180);
       text("Press r to restart", 460, 220);
     }
+
+    if (tie == true) {
+      textSize(50);
+      fill(255, 255, 255);
+      text("TIED!", 450, 150);
+      textSize(30);
+      text("Time: " + raceTime + " seconds", 460, 180);
+      text("Press r to restart", 460, 220);
+    }
   }
 }
 
@@ -170,37 +169,25 @@ void mousePressed() {
       countdownActive = true;
     }
 
-    if (mouseX > 200 && mouseX < 500 && mouseY > 310 && mouseY < 370) {
-      screen = 3;
-      countdownStart = millis();
-      countdownActive = true;
-    }
-
-    if (mouseX > 200 && mouseX < 500 && mouseY > 400 && mouseY < 460) {
+    if (mouseX > 700 && mouseX < 1000 && mouseY > 220 && mouseY < 280) {
       screen = 4;
       countdownStart = millis();
       countdownActive = true;
     }
 
-    if (mouseX > 700 && mouseX < 1000 && mouseY > 220 && mouseY < 280) {
+    if (mouseX > 200 && mouseX < 500 && mouseY > 310 && mouseY < 370) {
       screen = 5;
       countdownStart = millis();
       countdownActive = true;
     }
 
     if (mouseX > 700 && mouseX < 1000 && mouseY > 310 && mouseY < 370) {
-      screen = 6;
-      countdownStart = millis();
-      countdownActive = true;
-    }
-
-    if (mouseX > 700 && mouseX < 1000 && mouseY > 400 && mouseY < 460) {
       screen = 7;
       countdownStart = millis();
       countdownActive = true;
     }
 
-    if (mouseX > 450 && mouseX < 750 && mouseY > 520 && mouseY < 580) {
+    if (mouseX > 450 && mouseX < 750 && mouseY > 450 && mouseY < 510) {
       screen = 0;
     }
   }
@@ -211,6 +198,7 @@ void keyPressed() {
     car1X = 50;
     car2X = 50;
     winner = 0;
+    tie = false;
     raceStarted = false;
     raceTime = 0;
     countdownStart = millis();
