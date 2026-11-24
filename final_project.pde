@@ -11,6 +11,7 @@
 
 PImage player_1_car;
 PImage player_2_car;
+//* images made by chatgpt
 
 int screen = 0;
 int gamemode = 0;
@@ -33,6 +34,9 @@ int raceTimer = 0;
 
 void setup() {
   size(1200, 700);
+
+  player_1_car = loadImage("player_1_car.png");
+  player_2_car = loadImage("player_2_car.png");
 }
 
 void draw() {
@@ -90,11 +94,8 @@ void draw() {
     line(1100, 0, 1100, 700);
     noStroke();
 
-    fill(255, 0, 0);
-    rect(car1X, 250, 80, 40);
-
-    fill(255, 0, 0);
-    rect(car2X, 420, 80, 40);
+    image(player_1_car, car1X, 250, 100, 50);
+    image(player_2_car, car2X, 420, 100, 50);
 
     if (countdownActive) {
       int countdown = 3 - (millis() - countdownStart) / 1000;
@@ -121,11 +122,12 @@ void draw() {
       fill(255);
       text("Time: " + raceTime + " seconds", 50, 50);
 
-      if (car1X + 80 >= 1100 && car2X + 80 >= 1100) {
+      // Hitboxes now match the 100-pixel image width
+      if (car1X + 100 >= 1100 && car2X + 100 >= 1100) {
         tie = true;
-      } else if (car1X + 80 >= 1100) {
+      } else if (car1X + 100 >= 1100) {
         winner = 1;
-      } else if (car2X + 80 >= 1100) {
+      } else if (car2X + 100 >= 1100) {
         winner = 2;
       }
     }
@@ -210,14 +212,14 @@ void keyPressed() {
 
   if (winner == 0 && !countdownActive) {
     if ((key == 'd' || key == 'D') && dReleased) {
-      if (car1X < 1070) {
+      if (car1X < 1000) {
         car1X = car1X + 10;
       }
       dReleased = false;
     }
 
     if ((key == 'l' || key == 'L') && lReleased) {
-      if (car2X < 1070) {
+      if (car2X < 1000) {
         car2X = car2X + 10;
       }
       lReleased = false;
