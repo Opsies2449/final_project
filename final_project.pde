@@ -9,9 +9,13 @@
  TODO: add backgrounds and decoration
  */
 
+import processing.sound.*;
+
 PImage player_1_car;
 PImage player_2_car;
-//* images made by chatgpt
+// images made by chatgpt
+
+SoundFile backgroundSound;
 
 int screen = 0;
 int gamemode = 0;
@@ -32,11 +36,16 @@ int countdownStart = 0;
 boolean countdownActive = true;
 int raceTimer = 0;
 
+boolean soundPlayed = false;
+
 void setup() {
   size(1200, 700);
 
   player_1_car = loadImage("player_1_car.png");
   player_2_car = loadImage("player_2_car.png");
+  
+  backgroundSound = new SoundFile(this, "freesound_community-woohoo-1-92954.mp3");
+  // sound is from https://pixabay.com/sound-effects/people-woohoo-1-92954/
 }
 
 void draw() {
@@ -122,7 +131,6 @@ void draw() {
       fill(255);
       text("Time: " + raceTime + " seconds", 50, 50);
 
-      // Hitboxes now match the 100-pixel image width
       if (car1X + 100 >= 1100 && car2X + 100 >= 1100) {
         tie = true;
       } else if (car1X + 100 >= 1100) {
@@ -130,6 +138,11 @@ void draw() {
       } else if (car2X + 100 >= 1100) {
         winner = 2;
       }
+    }
+
+    if (winner != 0 && soundPlayed == false) {
+      backgroundSound.play();
+      soundPlayed = true;
     }
 
     if (winner == 1) {
@@ -206,6 +219,7 @@ void keyPressed() {
     tie = false;
     raceStarted = false;
     raceTime = 0;
+    soundPlayed = false;
     countdownStart = millis();
     countdownActive = true;
   }
@@ -213,14 +227,14 @@ void keyPressed() {
   if (winner == 0 && !countdownActive) {
     if ((key == 'd' || key == 'D') && dReleased) {
       if (car1X < 1000) {
-        car1X = car1X + 10;
+        car1X = car1X + 100;
       }
       dReleased = false;
     }
 
     if ((key == 'l' || key == 'L') && lReleased) {
       if (car2X < 1000) {
-        car2X = car2X + 10;
+        car2X = car2X + 100;
       }
       lReleased = false;
     }
