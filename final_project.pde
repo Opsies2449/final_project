@@ -6,13 +6,17 @@
  TODO: start making the actual game -DONE
  TODO: add a timer that shows how fast you raced -DONE
  TODO: add a restart button -DONE
- TODO: add backgrounds and decoration
+ TODO: add backgrounds and decoration -DONE
  */
 
 import processing.sound.*;
 
 PImage player_1_car;
 PImage player_2_car;
+
+PImage neighborhoodMap;
+PImage garbageMap;
+PImage sushiMap;
 // images made by chatgpt
 
 SoundFile backgroundSound;
@@ -43,7 +47,11 @@ void setup() {
 
   player_1_car = loadImage("player_1_car.png");
   player_2_car = loadImage("player_2_car.png");
-  
+
+  neighborhoodMap = loadImage("adam neighborhood.png");
+  garbageMap = loadImage("garbage disposal.png");
+  sushiMap = loadImage("sushi resturaunt.png");
+
   backgroundSound = new SoundFile(this, "freesound_community-woohoo-1-92954.mp3");
   // sound is from https://pixabay.com/sound-effects/people-woohoo-1-92954/
 }
@@ -68,49 +76,54 @@ void draw() {
     fill(255, 255, 255);
     text("Select a map", 480, 150);
 
-    fill(50, 180, 80);
-    rect(200, 220, 300, 60);
-    fill(255, 255, 255);
     textSize(20);
-    text("Adam's neighborhood", 265, 257);
+
+    fill(50, 180, 80);
+    rect(50, 300, 350, 60);
+    fill(255, 255, 255);
+    textAlign(CENTER, CENTER);
+    text("Adam's neighborhood", 225, 330);
 
     fill(50, 100, 220);
-    rect(700, 220, 300, 60);
+    rect(425, 300, 350, 60);
     fill(255, 255, 255);
-    text("Garbage disposal", 775, 257);
+    text("Garbage disposal", 600, 330);
 
     fill(150, 50, 200);
-    rect(200, 310, 300, 60);
+    rect(800, 300, 350, 60);
     fill(255, 255, 255);
-    text("Sushi resturant", 285, 347);
-
-    fill(200, 100, 100);
-    rect(700, 310, 300, 60);
-    fill(255, 255, 255);
-    text("Super steep ski hill", 765, 347);
+    text("Sushi restaurant", 975, 330);
 
     fill(220, 3, 2);
     rect(450, 450, 300, 60);
     fill(255, 255, 255);
-    text("Back", 575, 487);
+    text("Back", 600, 480);
+
+    textAlign(LEFT, BASELINE);
   }
 
-  if (screen == 2 || screen == 3 || screen == 4 ||
-    screen == 5 || screen == 6 || screen == 7) {
+  if (screen == 2 || screen == 4 || screen == 5) {
 
-    stroke(255);
-    strokeWeight(5);
-    line(1100, 0, 1100, 700);
-    noStroke();
+    if (screen == 2) {
+      image(neighborhoodMap, 0, 0, 1200, 700);
+    }
 
-    image(player_1_car, car1X, 250, 100, 50);
-    image(player_2_car, car2X, 420, 100, 50);
+    if (screen == 4) {
+      image(garbageMap, 0, 0, 1200, 700);
+    }
+
+    if (screen == 5) {
+      image(sushiMap, 0, 0, 1200, 700);
+    }
+
+    image(player_1_car, car1X, 380, 100, 50);
+    image(player_2_car, car2X, 450, 100, 50);
 
     if (countdownActive) {
       int countdown = 3 - (millis() - countdownStart) / 1000;
 
       textSize(100);
-      fill(255, 255, 255);
+      fill(0, 0, 0);
 
       if (countdown > 0) {
         text(countdown, 570, 350);
@@ -128,7 +141,7 @@ void draw() {
       raceTime = (millis() - raceTimer) / 1000;
 
       textSize(25);
-      fill(255);
+      fill(0, 0, 0);
       text("Time: " + raceTime + " seconds", 50, 50);
 
       if (car1X + 100 >= 1100 && car2X + 100 >= 1100) {
@@ -147,7 +160,7 @@ void draw() {
 
     if (winner == 1) {
       textSize(50);
-      fill(255, 255, 255);
+      fill(0, 0, 0);
       text("PLAYER 1 WINS!", 400, 150);
       textSize(30);
       text("Time: " + raceTime + " seconds", 460, 180);
@@ -156,7 +169,7 @@ void draw() {
 
     if (winner == 2) {
       textSize(50);
-      fill(255, 255, 255);
+      fill(0, 0, 0);
       text("PLAYER 2 WINS!", 400, 150);
       textSize(30);
       text("Time: " + raceTime + " seconds", 460, 180);
@@ -165,7 +178,7 @@ void draw() {
 
     if (tie == true) {
       textSize(50);
-      fill(255, 255, 255);
+      fill(0, 0, 0);
       text("TIED!", 450, 150);
       textSize(30);
       text("Time: " + raceTime + " seconds", 460, 180);
@@ -181,26 +194,20 @@ void mousePressed() {
       screen = 1;
     }
   } else if (screen == 1) {
-    if (mouseX > 200 && mouseX < 500 && mouseY > 220 && mouseY < 280) {
+    if (mouseX > 50 && mouseX < 400 && mouseY > 300 && mouseY < 360) {
       screen = 2;
       countdownStart = millis();
       countdownActive = true;
     }
 
-    if (mouseX > 700 && mouseX < 1000 && mouseY > 220 && mouseY < 280) {
+    if (mouseX > 425 && mouseX < 775 && mouseY > 300 && mouseY < 360) {
       screen = 4;
       countdownStart = millis();
       countdownActive = true;
     }
 
-    if (mouseX > 200 && mouseX < 500 && mouseY > 310 && mouseY < 370) {
+    if (mouseX > 800 && mouseX < 1150 && mouseY > 300 && mouseY < 360) {
       screen = 5;
-      countdownStart = millis();
-      countdownActive = true;
-    }
-
-    if (mouseX > 700 && mouseX < 1000 && mouseY > 310 && mouseY < 370) {
-      screen = 7;
       countdownStart = millis();
       countdownActive = true;
     }
@@ -227,14 +234,14 @@ void keyPressed() {
   if (winner == 0 && !countdownActive) {
     if ((key == 'd' || key == 'D') && dReleased) {
       if (car1X < 1000) {
-        car1X = car1X + 100;
+        car1X = car1X + 10;
       }
       dReleased = false;
     }
 
     if ((key == 'l' || key == 'L') && lReleased) {
       if (car2X < 1000) {
-        car2X = car2X + 100;
+        car2X = car2X + 10;
       }
       lReleased = false;
     }
