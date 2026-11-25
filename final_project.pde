@@ -1,7 +1,7 @@
 /*
  Adam
  Final processing project
- TODO: add brief description of final project here
+ My game is a two player racing game where you press d or l as fast as you can to win
  TODO: inlcude a map selection after choosing a gamemode -DONE
  TODO: start making the actual game -DONE
  TODO: add a timer that shows how fast you raced -DONE
@@ -56,6 +56,7 @@ void setup() {
   // sound is from https://pixabay.com/sound-effects/people-woohoo-1-92954/
 }
 
+
 void draw() {
   background(0, 0, 0);
 
@@ -81,25 +82,22 @@ void draw() {
     fill(50, 180, 80);
     rect(50, 300, 350, 60);
     fill(255, 255, 255);
-    textAlign(CENTER, CENTER);
-    text("Adam's neighborhood", 225, 330);
+    text("Adam's neighborhood", 150, 338);
 
     fill(50, 100, 220);
     rect(425, 300, 350, 60);
     fill(255, 255, 255);
-    text("Garbage disposal", 600, 330);
+    text("Garbage disposal", 520, 338);
 
     fill(150, 50, 200);
     rect(800, 300, 350, 60);
     fill(255, 255, 255);
-    text("Sushi restaurant", 975, 330);
+    text("Sushi restaurant", 895, 338);
 
     fill(220, 3, 2);
     rect(450, 450, 300, 60);
     fill(255, 255, 255);
-    text("Back", 600, 480);
-
-    textAlign(LEFT, BASELINE);
+    text("Back", 567, 488);
   }
 
   if (screen == 2 || screen == 4 || screen == 5) {
