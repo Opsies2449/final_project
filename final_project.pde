@@ -62,9 +62,9 @@ void draw() {
     background(28, 52, 78);
     noStroke();
 
-    textSize(55);
+    textSize(65);
     fill(255, 205, 90);
-    text("ADAM'S GRAND PRIX", 370, 200);
+    text("ADAM'S GRAND PRIX", 342, 200);
 
     textSize(20);
     fill(255, 255, 255);
