@@ -22,7 +22,6 @@ PImage sushiMap;
 SoundFile backgroundSound;
 
 int screen = 0;
-int gamemode = 0;
 
 int car1X = 50;
 int car2X = 50;
@@ -56,48 +55,58 @@ void setup() {
   // sound is from https://pixabay.com/sound-effects/people-woohoo-1-92954/
 }
 
-
 void draw() {
   background(0, 0, 0);
 
   if (screen == 0) {
-    textSize(40);
+    background(28, 52, 78);
+    noStroke();
+
+    textSize(55);
+    fill(255, 205, 90);
+    text("ADAM'S GRAND PRIX", 370, 200);
+
+    textSize(20);
     fill(255, 255, 255);
-    text("Adam's Grand Prix game", 410, 220);
+    text("Race with your friend!", 507, 275);
 
     fill(50, 180, 80);
     rect(450, 310, 300, 60);
+
     fill(255, 255, 255);
     textSize(30);
-    text("PLAY", 567, 350);
+    text("PLAY", 565, 350);
   }
 
   if (screen == 1) {
+    background(28, 52, 78);
+    noStroke();
+
     textSize(40);
-    fill(255, 255, 255);
-    text("Select a map", 480, 150);
+    fill(255, 205, 90);
+    text("Select a map", 493, 150);
 
     textSize(20);
 
     fill(50, 180, 80);
     rect(50, 300, 350, 60);
     fill(255, 255, 255);
-    text("Adam's neighborhood", 150, 338);
+    text("Adam's neighborhood", 135, 338);
 
     fill(50, 100, 220);
     rect(425, 300, 350, 60);
     fill(255, 255, 255);
-    text("Garbage disposal", 520, 338);
+    text("Garbage disposal", 525, 338);
 
     fill(150, 50, 200);
     rect(800, 300, 350, 60);
     fill(255, 255, 255);
-    text("Sushi restaurant", 895, 338);
+    text("Sushi restaurant", 907, 338);
 
     fill(220, 3, 2);
     rect(450, 450, 300, 60);
     fill(255, 255, 255);
-    text("Back", 567, 488);
+    text("Back", 580, 488);
   }
 
   if (screen == 2 || screen == 4 || screen == 5) {
@@ -113,6 +122,10 @@ void draw() {
     if (screen == 5) {
       image(sushiMap, 0, 0, 1200, 700);
     }
+
+    noStroke();
+    fill(255, 255, 255);
+    rect(1097, 381, 5, 138);
 
     image(player_1_car, car1X, 380, 100, 50);
     image(player_2_car, car2X, 450, 100, 50);
@@ -188,7 +201,6 @@ void draw() {
 void mousePressed() {
   if (screen == 0) {
     if (mouseX > 450 && mouseX < 750 && mouseY > 310 && mouseY < 370) {
-      gamemode = 1;
       screen = 1;
     }
   } else if (screen == 1) {
@@ -227,7 +239,7 @@ void keyPressed() {
     soundPlayed = false;
     countdownStart = millis();
     countdownActive = true;
-  }
+  }  
 
   if (winner == 0 && !countdownActive) {
     if ((key == 'd' || key == 'D') && dReleased) {
